@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bob Şehri</title>
+  <style>
+    body {
+      background: #e0f7fa;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #00796b;
+    }
+
+    .cube {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+    }
+
+    .cube img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: red;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-item {
+      max-width: 150px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .gallery-item p {
+      margin-top: 8px;
+      font-size: 1em;
+      color: #004d40;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🏙️ Bob Şehri'ne Hoş Geldin!</h1>
+  <div class="cube">
+    <img src="1000020459.jpg" alt="Bob Küpü">
+  </div>
+
+  <button id="joinButton">Bu Şehre Katıl</button>
+  <div class="message" id="message"></div>
+
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="1000020460.jpg" alt="Bob 1">
+      <p>bu 4. sınıfta yıldız hocanın bize küp yapmasını istedi</p>
+    </div>
+    <div class="gallery-item">
+      <img src="1000020461.jpg" alt="Bob 2">
+      <p>ve ilk bob öldü ve onu gömdük</p>
+    </div>
+    <div class="gallery-item">
+      <img src="1000021693.jpg" alt="Bob 3">
+      <p>5. sınıfta geri hatırladık ve yapmaya başladık 6. sınıfta hocaya bobları gösterdik ve şehri yaptık</p>
+    </div>
+  </div>
+
+  <script>
+    const button = document.getElementById('joinButton');
+    const message = document.getElementById('message');
+
+    button.addEventListener('click', () => {
+      message.textContent = "Şehir dolu!";
+      setTimeout(() => {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }, 1000);
+    });
+  </script>
+
+</body>
+</html>
