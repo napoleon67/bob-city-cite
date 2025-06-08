@@ -115,38 +115,43 @@
   <!-- Bu görsel sabit yüklü bir örnek görseldir, kendi görselinle değiştir: -->
   <img src="1000020459.jpg" alt="Kovalayan Bob" id="chaser" />
 
-  <script>
-    const button = document.getElementById('joinButton');
-    const message = document.getElementById('message');
+<script>
+  const button = document.getElementById('joinButton');
+  const message = document.getElementById('message');
 
-    button.addEventListener('click', () => {
-      message.textContent = "Şehir dolu!";
-      setTimeout(() => {
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-      }, 1000);
-    });
+  button.addEventListener('click', () => {
+    message.textContent = "Şehir dolu!";
+    setTimeout(() => {
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    }, 1000);
+  });
 
-    // Fareyi yavaşça 15 piksel sağdan kovalayan görsel
-    const chaser = document.getElementById('chaser');
-    let chaserX = window.innerWidth / 2;
-    let chaserY = window.innerHeight / 2;
-    let targetX = chaserX;
-    let targetY = chaserY;
+  const chaser = document.getElementById('chaser');
+  let chaserX = window.innerWidth / 2;
+  let chaserY = window.innerHeight / 2;
+  let mouseX = chaserX;
+  let mouseY = chaserY;
 
-    document.addEventListener('mousemove', (e) => {
-      targetX = e.clientX + 15;
-      targetY = e.clientY;
-    });
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
-    function animate() {
-      chaserX += (targetX - chaserX) * 0.05;
-      chaserY += (targetY - chaserY) * 0.05;
-      chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
-      requestAnimationFrame(animate);
-    }
+  function animate() {
+    const targetX = mouseX + 15; // tam 15 piksel sağda duracak
+    const targetY = mouseY;
 
-    animate();
-  </script>
+    chaserX += (targetX - chaserX) * 0.1;
+    chaserY += (targetY - chaserY) * 0.1;
+
+    chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
 
 </body>
 </html>
