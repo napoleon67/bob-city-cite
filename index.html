@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bob Şehr</title>
+  <title>Bob Şehri</title>
   <style>
     body {
       background: #e0f7fa;
       font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      padding: 50px;
+      padding: 20px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
     }
 
     h1 {
@@ -19,9 +24,9 @@
     }
 
     .cube {
-      width: 200px;
-      height: 200px;
-      margin: 20px auto;
+      width: 250px;
+      height: 250px;
+      margin: 10px auto;
     }
 
     .cube img {
@@ -79,11 +84,12 @@
 
     #chaser {
       position: fixed;
-      width: 50px;
-      height: 50px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       pointer-events: none;
       z-index: 999;
+      transition: transform 0.05s linear;
     }
   </style>
 </head>
@@ -112,7 +118,7 @@
     </div>
   </div>
 
-  <!-- Bu görsel sabit yüklü bir örnek görseldir, kendi görselinle değiştir: -->
+  <!-- Bob (Chaser) -->
   <img src="1000020459.jpg" alt="Kovalayan Bob" id="chaser" />
 
 <script>
@@ -138,11 +144,11 @@
   });
 
   function animate() {
-    const targetX = mouseX - 10; // tam 15 piksel sağda duracak
-    const targetY = mouseY;
+    const targetX = mouseX - 50; // tam ortalansın
+    const targetY = mouseY - 50;
 
-    chaserX += (targetX - chaserX) * 0.1;
-    chaserY += (targetY - chaserY) * 0.1;
+    chaserX += (targetX - chaserX) * 0.2;
+    chaserY += (targetY - chaserY) * 0.2;
 
     chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
 
