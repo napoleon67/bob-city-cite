@@ -133,25 +133,31 @@
   let mouseY = chaserY;
 
   document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
+    mouseX = e.clientX + 15;  // tam 15px sağında duracak
     mouseY = e.clientY;
   });
 
   function animate() {
-    const targetX = mouseX + 1; // tam 15 piksel sağda duracak
-    const targetY = mouseY + 1;
+    const dx = mouseX - chaserX;
+    const dy = mouseY - chaserY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-    chaserX += (targetX - chaserX) * 0.1;
-    chaserY += (targetY - chaserY) * 0.1;
+    // Her karede 0.0063px yaklaşmak için
+    const maxStep = 0.0063;
 
-    chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
+    if (distance > 0.001) {
+      const stepX = (dx / distance) * maxStep;
+      const stepY = (dy / distance) * maxStep;
+      chaserX += stepX;
+      chaserY += stepY;
+      chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
+    }
 
     requestAnimationFrame(animate);
   }
 
   animate();
 </script>
-
 
 </body>
 </html>
