@@ -112,7 +112,8 @@
     </div>
   </div>
 
-  <img src="1000020459.jpg" alt="Kovalayan Bob" id="chaser" />
+  <!-- Bu görsel sabit yüklü bir örnek görseldir, kendi görselinle değiştir: -->
+  <img src="https://via.placeholder.com/50" alt="Kovalayan Bob" id="chaser" />
 
   <script>
     const button = document.getElementById('joinButton');
@@ -125,6 +126,7 @@
       }, 1000);
     });
 
+    // Fareyi yavaşça 15 piksel sağdan kovalayan görsel
     const chaser = document.getElementById('chaser');
     let chaserX = window.innerWidth / 2;
     let chaserY = window.innerHeight / 2;
