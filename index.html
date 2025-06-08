@@ -75,6 +75,16 @@
       font-size: 1em;
       color: #004d40;
     }
+
+    #chaser {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform 0.1s ease-out;
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
@@ -102,6 +112,8 @@
     </div>
   </div>
 
+  <img src="1000020459.jpg" alt="Kovalayan Bob" id="chaser" />
+
   <script>
     const button = document.getElementById('joinButton');
     const message = document.getElementById('message');
@@ -111,6 +123,24 @@
       setTimeout(() => {
         window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
       }, 1000);
+    });
+
+    // Fareyi kovalayan görselin hareketi
+    const chaser = document.getElementById('chaser');
+    let chaserX = window.innerWidth / 2;
+    let chaserY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (e) => {
+      const dx = e.clientX - chaserX;
+      const dy = e.clientY - chaserY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const speed = 0.03;
+
+      if (distance > 1) {
+        chaserX += dx * speed;
+        chaserY += dy * speed;
+        chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
+      }
     });
   </script>
 
