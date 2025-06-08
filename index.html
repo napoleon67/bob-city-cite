@@ -128,22 +128,22 @@
     const chaser = document.getElementById('chaser');
     let chaserX = window.innerWidth / 2;
     let chaserY = window.innerHeight / 2;
+    let targetX = chaserX;
+    let targetY = chaserY;
 
     document.addEventListener('mousemove', (e) => {
-      const targetX = e.clientX + 15;
-      const targetY = e.clientY;
-
-      const dx = targetX - chaserX;
-      const dy = targetY - chaserY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      const speed = 0.05;
-
-      if (distance > 1) {
-        chaserX += dx * speed;
-        chaserY += dy * speed;
-        chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
-      }
+      targetX = e.clientX + 15;
+      targetY = e.clientY;
     });
+
+    function animate() {
+      chaserX += (targetX - chaserX) * 0.05;
+      chaserY += (targetY - chaserY) * 0.05;
+      chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   </script>
 
 </body>
