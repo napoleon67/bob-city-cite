@@ -96,12 +96,6 @@
 </head>
 <body>
 
-  <!-- Arka Plan Müziği -->
-  <audio id="backgroundMusic" autoplay loop>
-    <source src="muzik.mp3" type="audio/mpeg">
-    Tarayıcınız ses etiketini desteklemiyor.
-  </audio>
-
   <h1>🏙️ Bob Şehri'ne Hoş Geldin!</h1>
   <div class="cube">
     <img src="14.jpg" alt="Bob Küpü">
@@ -111,10 +105,53 @@
   <div class="message" id="message"></div>
 
   <div class="gallery">
-    <!-- 11 fotoğraf burada (değiştirilmedi, aynı şekilde korunur) -->
-    <!-- ...galeri öğeleri burada... -->
+    <div class="gallery-item">
+      <img src="14.jpg" alt="Bob 1">
+      <p>Bu 4. sınıfta Yıldız Hoca'nın bize küp yapmamızı istediği an.</p>
+    </div>
+    <div class="gallery-item">
+      <img src="13.jpg" alt="Bob 2">
+      <p>Ve ilk Bob öldü... onu törenle gömdük.</p>
+    </div>
+    <div class="gallery-item">
+      <img src="16.jpg" alt="Bob 3">
+      <p>5. sınıfta geri hatırladık, 6. sınıfta şehri yaptık.</p>
+    </div>
+    <div class="gallery-item">
+      <img src="1.jpg" alt="Bob 4">
+      <p>bob şehrinin boş hali</p>
+    </div>
+    <div class="gallery-item">
+      <img src="2.jpg" alt="Bob 5">
+      <p>breaking bad e gönderme ?.</p>
+    </div>
+    <div class="gallery-item">
+      <img src="3.jpg" alt="Bob 6">
+      <p>yine mi en son 3. sezonda kaldım</p>
+    </div>
+    <div class="gallery-item">
+      <img src="4.jpg" alt="Bob 7">
+      <p>Bob şehrinin gülhane parkı</p>
+    </div>
+    <div class="gallery-item">
+      <img src="5.jpg" alt="Bob 8">
+      <p>orada uzaylı mı var ?.</p>
+    </div>
+    <div class="gallery-item">
+      <img src="6.jpg" alt="Bob 9">
+      <p>olamaz kaza oldu jassie plastik kova al</p>
+    </div>
+    <div class="gallery-item">
+      <img src="7.jpg" alt="Bob 10">
+      <p>doom guy ?.</p>
+    </div>
+    <div class="gallery-item">
+      <img src="8.jpg" alt="Bob 11">
+      <p>o ben miyim vay be.</p>
+    </div>
   </div>
 
+  <!-- Bob Kovalayıcı -->
   <img src="14.jpg" alt="Kovalayan Bob" id="chaser" />
 
 <script>
@@ -146,20 +183,12 @@
     chaserX += (targetX - chaserX) * 0.2;
     chaserY += (targetY - chaserY) * 0.2;
 
-    chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
+    chaser.style.transform = translate(${chaserX}px, ${chaserY}px);
 
     requestAnimationFrame(animate);
   }
 
   animate();
-
-  // Otomatik oynatmayı tetikle (Chrome uyumu için)
-  window.addEventListener('click', () => {
-    const music = document.getElementById("The Weeknd - Blinding Lights (Official Audio) - TheWeekndVEVO.mp3");
-    if (music.paused) {
-      music.play();
-    }
-  });
 </script>
 
 </body>
