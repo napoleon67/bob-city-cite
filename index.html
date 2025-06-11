@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bob Şehri</title>
+  <title>Bob Şehri'nin sitesi</title>
   <style>
     body {
       background: #e0f7fa;
@@ -169,12 +169,12 @@
 
     let chaserX = window.innerWidth / 2 - 50; // Başlangıç x (merkez)
     let chaserY = window.innerHeight / 2 - 50; // Başlangıç y (merkez)
-    let mouseX = chaserX + 50; // Fare başlangıç, merkezde
-    let mouseY = chaserY + 50;
+    let mouseX = chaserX + 40; // Fare başlangıç, merkezde
+    let mouseY = chaserY + 40;
 
     chaser.style.left = chaserX + 'px';
     chaser.style.top = chaserY + 'px';
-    chaser.style.transform = 'scale(0.3)';
+    chaser.style.transform = 'scale(0.1)';
 
     button.addEventListener('click', () => {
       message.textContent = "Şehir dolu!";
