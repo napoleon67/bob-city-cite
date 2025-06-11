@@ -10,12 +10,12 @@
       font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
       padding: 20px;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
+      overflow-y: auto; /* sayfanın kaymasını sağlar */
     }
 
     h1 {
@@ -54,8 +54,14 @@
 
     .message {
       margin-top: 20px;
-      font-size: 1.5em;
+      font-size: 1.8em;
       color: red;
+      animation: fadein 0.5s ease-in-out;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .gallery {
@@ -154,41 +160,43 @@
   <!-- Bob Kovalayıcı -->
   <img src="1.jpg" alt="Kovalayan Bob" id="chaser" />
 
-<script>
-  const button = document.getElementById('joinButton');
-  const message = document.getElementById('message');
+  <script>
+    const button = document.getElementById('joinButton');
+    const message = document.getElementById('message');
 
-  button.addEventListener('click', () => {
-    message.textContent = "Şehir dolu!";
-    setTimeout(() => {
-      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-    }, 1000);
-  });
+    button.addEventListener('click', () => {
+      message.textContent = "🚫 Şehir dolu!";
+      button.disabled = true;
+      setTimeout(() => {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }, 1000);
+    });
 
-  const chaser = document.getElementById('chaser');
-  let chaserX = window.innerWidth / 2;
-  let chaserY = window.innerHeight / 2;
-  let mouseX = chaserX;
-  let mouseY = chaserY;
+    const chaser = document.getElementById('chaser');
+    let chaserX = window.innerWidth / 2;
+    let chaserY = window.innerHeight / 2;
+    let mouseX = chaserX;
+    let mouseY = chaserY;
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-  function animate() {
-    const targetX = mouseX - 50;
-    const targetY = mouseY - 50;
+    function animate() {
+      const targetX = mouseX - 50;
+      const targetY = mouseY - 50;
 
-    chaserX += (targetX - chaserX) * 0.2;
-    chaserY += (targetY - chaserY) * 0.2;
+      chaserX += (targetX - chaserX) * 0.2;
+      chaserY += (targetY - chaserY) * 0.2;
 
-    chaser.style.transform = translate(${chaserX}px, ${chaserY}px);
+      chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
 
-    requestAnimationFrame(animate);
-  }
+      requestAnimationFrame(animate);
+    }
 
-  animate();
-</script>
+    animate();
+  </script>
 
 </body>
+</html>
