@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bob Şehri'nin sitesti 0.2</title>
+  <title>Bob Şehri'nin sitesti 0.3</title>
   <style>
     body {
       background: #e0f7fa;
@@ -97,9 +97,22 @@
       pointer-events: none;
       z-index: 999;
       transition: transform 0.05s linear;
-      transform: scale(0.3);
+      transform-origin: center center;
       left: calc(50vw - 50px);
       top: calc(50vh - 50px);
+    }
+
+    /* Titreme animasyonu */
+    @keyframes shake {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(-2px, 2px) rotate(-5deg); }
+      40% { transform: translate(2px, -2px) rotate(5deg); }
+      60% { transform: translate(-2px, 2px) rotate(-5deg); }
+      80% { transform: translate(2px, -2px) rotate(5deg); }
+    }
+
+    .shaking {
+      animation: shake 0.3s infinite;
     }
   </style>
 </head>
@@ -169,12 +182,12 @@
 
     let chaserX = window.innerWidth / 2 - 50; // Başlangıç x (merkez)
     let chaserY = window.innerHeight / 2 - 50; // Başlangıç y (merkez)
-    let mouseX = chaserX + 10; // Fare başlangıç, merkezde
-    let mouseY = chaserY + 10;
+    let mouseX = chaserX + 50; // Fare başlangıç, merkezde (chaser genişlik/2)
+    let mouseY = chaserY + 50;
 
     chaser.style.left = chaserX + 'px';
     chaser.style.top = chaserY + 'px';
-    chaser.style.transform = 'scale(0.1)';
+    chaser.style.transform = 'scale(1)';
 
     button.addEventListener('click', () => {
       message.textContent = "Şehir dolu!";
@@ -191,8 +204,8 @@
 
     function animate() {
       // Fare pozisyonunun ortasına doğru hareket için
-      const chaserCenterX = chaserX + 10;
-      const chaserCenterY = chaserY + 10;
+      const chaserCenterX = chaserX + 50; // chaser yarı genişlik
+      const chaserCenterY = chaserY + 50; // chaser yarı yükseklik
 
       const dx = mouseX - chaserCenterX;
       const dy = mouseY - chaserCenterY;
@@ -211,11 +224,12 @@
         chaser.style.top = chaserY + 'px';
       }
 
-      // Scale animasyonu (0.3'ten 1.0'a yaklaşma)
-      let currentScale = parseFloat(chaser.style.transform.replace(/[^0-9\.]/g, '')) || 0.3;
-      currentScale += (1 - currentScale) * 0.01;
-      if(currentScale > 1) currentScale = 1;
-      chaser.style.transform = `scale(${currentScale})`;
+      // Eğer chaser fareye çok yakınsa (örneğin 50px), titret
+      if (distance < 50) {
+        chaser.classList.add('shaking');
+      } else {
+        chaser.classList.remove('shaking');
+      }
 
       requestAnimationFrame(animate);
     }
