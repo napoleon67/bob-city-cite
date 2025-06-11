@@ -158,7 +158,7 @@
   </div>
 
   <!-- Bob Kovalayıcı -->
-  <img src="1.jpg" alt="Kovalayan Bob" id="chaser" />
+  <img src="14.jpg" alt="Kovalayan Bob" id="chaser" />
 
   <script>
     const button = document.getElementById('joinButton');
@@ -183,17 +183,32 @@
       mouseY = e.clientY;
     });
 
-    function animate() {
-      const targetX = mouseX - 50;
-      const targetY = mouseY - 50;
+function animate() {
+  const targetX = mouseX - 50;
+  const targetY = mouseY - 50;
 
-      chaserX += (targetX - chaserX) * 0.2;
-      chaserY += (targetY - chaserY) * 0.2;
+  chaserX += (targetX - chaserX) * 0.2;
+  chaserY += (targetY - chaserY) * 0.2;
 
-      chaser.style.transform = `translate(${chaserX}px, ${chaserY}px)`;
+  // Fare ile chaser arasındaki mesafeyi hesapla
+  const dx = mouseX - chaserX;
+  const dy = mouseY - chaserY;
+  const distance = Math.sqrt(dx * dx + dy * dy);
 
-      requestAnimationFrame(animate);
-    }
+  // Yakınlık durumuna göre ölçek ayarla (scale)
+  const maxScale = 2;
+  const minScale = 0.7;
+  const maxDistance = 500;
+
+  // Mesafe büyüdükçe ölçek küçülür
+  let scale = maxScale - (distance / maxDistance);
+  scale = Math.max(minScale, Math.min(maxScale, scale)); // sınırlandır
+
+  // Hem pozisyon hem ölçek animasyonu
+  chaser.style.transform = `translate(${chaserX}px, ${chaserY}px) scale(${scale})`;
+
+  requestAnimationFrame(animate);
+}
 
     animate();
   </script>
