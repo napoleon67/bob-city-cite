@@ -184,28 +184,27 @@
     });
 
 function animate() {
-  const targetX = mouseX - 50;
-  const targetY = mouseY - 50;
-
-  chaserX += (targetX - chaserX) * 0.2;
-  chaserY += (targetY - chaserY) * 0.2;
-
-  // Fare ile chaser arasındaki mesafeyi hesapla
   const dx = mouseX - chaserX;
   const dy = mouseY - chaserY;
   const distance = Math.sqrt(dx * dx + dy * dy);
 
-  // Yakınlık durumuna göre ölçek ayarla (scale)
-  const maxScale = 2;
-  const minScale = 0.7;
-  const maxDistance = 500;
+  const speed = 5;
 
-  // Mesafe büyüdükçe ölçek küçülür
-  let scale = maxScale - (distance / maxDistance);
-  scale = Math.max(minScale, Math.min(maxScale, scale)); // sınırlandır
+  if (distance > 1) {
+    const vx = (dx / distance) * speed;
+    const vy = (dy / distance) * speed;
 
-  // Hem pozisyon hem ölçek animasyonu
-  chaser.style.transform = `translate(${chaserX}px, ${chaserY}px) scale(${scale})`;
+    chaserX += vx;
+    chaserY += vy;
+  }
+
+  // Başlangıçta küçük, sonra yavaşça scale = 1'e ulaşacak
+  let currentScale = parseFloat(chaser.style.getPropertyValue('--scale') || 0.3);
+  currentScale += (1 - currentScale) * 0.05; // yavaşça 1'e yaklaşır
+  chaser.style.setProperty('--scale', currentScale);
+
+  // Hareket + büyüme
+  chaser.style.transform = `translate(${chaserX}px, ${chaserY}px) scale(${currentScale})`;
 
   requestAnimationFrame(animate);
 }
