@@ -15,7 +15,7 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
-      overflow-y: auto; /* sayfanın kaymasını sağlar */
+      overflow-y: auto;
     }
 
     h1 {
@@ -97,6 +97,7 @@
       pointer-events: none;
       z-index: 999;
       transition: transform 0.05s linear;
+      transform: scale(0.3); /* başlangıçta küçük */
     }
   </style>
 </head>
@@ -111,59 +112,29 @@
   <div class="message" id="message"></div>
 
   <div class="gallery">
-    <div class="gallery-item">
-      <img src="14.jpg" alt="Bob 1">
-      <p>Bu 4. sınıfta Yıldız Hoca'nın bize küp yapmamızı istediği an.</p>
-    </div>
-    <div class="gallery-item">
-      <img src="13.jpg" alt="Bob 2">
-      <p>Ve ilk Bob öldü... onu törenle gömdük.</p>
-    </div>
-    <div class="gallery-item">
-      <img src="16.jpg" alt="Bob 3">
-      <p>5. sınıfta geri hatırladık, 6. sınıfta şehri yaptık.</p>
-    </div>
-    <div class="gallery-item">
-      <img src="1.jpg" alt="Bob 4">
-      <p>bob şehrinin boş hali</p>
-    </div>
-    <div class="gallery-item">
-      <img src="2.jpg" alt="Bob 5">
-      <p>breaking bad e gönderme ?.</p>
-    </div>
-    <div class="gallery-item">
-      <img src="3.jpg" alt="Bob 6">
-      <p>yine mi en son 3. sezonda kaldım</p>
-    </div>
-    <div class="gallery-item">
-      <img src="4.jpg" alt="Bob 7">
-      <p>Bob şehrinin gülhane parkı</p>
-    </div>
-    <div class="gallery-item">
-      <img src="5.jpg" alt="Bob 8">
-      <p>orada uzaylı mı var ?.</p>
-    </div>
-    <div class="gallery-item">
-      <img src="6.jpg" alt="Bob 9">
-      <p>olamaz kaza oldu jassie plastik kova al</p>
-    </div>
-    <div class="gallery-item">
-      <img src="7.jpg" alt="Bob 10">
-      <p>doom guy ?.</p>
-    </div>
-    <div class="gallery-item">
-      <img src="8.jpg" alt="Bob 11">
-      <p>o ben miyim vay be.</p>
-    </div>
+    <!-- örnek görseller -->
+    <div class="gallery-item"><img src="14.jpg"><p>Küp yapma anı</p></div>
+    <div class="gallery-item"><img src="13.jpg"><p>İlk Bob’un ölümü</p></div>
+    <div class="gallery-item"><img src="16.jpg"><p>Bob Şehri inşası</p></div>
   </div>
 
-  <!-- Bob Kovalayıcı -->
-  <img src="14.jpg" alt="Kovalayan Bob" id="chaser" />
+  <!-- Kovalayan Bob -->
+  <img src="1.jpg" alt="Kovalayan Bob" id="chaser" />
 
   <script>
     const button = document.getElementById('joinButton');
     const message = document.getElementById('message');
+    const chaser = document.getElementById('chaser');
 
+    let chaserX = window.innerWidth / 2;
+    let chaserY = window.innerHeight / 2;
+    let mouseX = chaserX;
+    let mouseY = chaserY;
+
+    // Başlangıç ölçeği
+    chaser.style.setProperty('--scale', 0.3);
+
+    // Buton tıklama -> yazı göster, 1 saniye sonra yönlendir
     button.addEventListener('click', () => {
       message.textContent = "🚫 Şehir dolu!";
       button.disabled = true;
@@ -172,42 +143,39 @@
       }, 1000);
     });
 
-    const chaser = document.getElementById('chaser');
-    let chaserX = window.innerWidth / 2;
-    let chaserY = window.innerHeight / 2;
-    let mouseX = chaserX;
-    let mouseY = chaserY;
-
+    // Fare konumunu güncelle
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     });
 
-function animate() {
-  const dx = mouseX - chaserX;
-  const dy = mouseY - chaserY;
-  const distance = Math.sqrt(dx * dx + dy * dy);
+    // Hareket ve büyüme animasyonu
+    function animate() {
+      const chaserSize = 100;
+      const dx = mouseX - (chaserX + chaserSize / 2);
+      const dy = mouseY - (chaserY + chaserSize / 2);
+      const distance = Math.sqrt(dx * dx + dy * dy);
 
-  const speed = 5;
+      const speed = 5;
 
-  if (distance > 1) {
-    const vx = (dx / distance) * speed;
-    const vy = (dy / distance) * speed;
+      if (distance > 1) {
+        const vx = (dx / distance) * speed;
+        const vy = (dy / distance) * speed;
 
-    chaserX += vx;
-    chaserY += vy;
-  }
+        chaserX += vx;
+        chaserY += vy;
+      }
 
-  // Başlangıçta küçük, sonra yavaşça scale = 1'e ulaşacak
-  let currentScale = parseFloat(chaser.style.getPropertyValue('--scale') || 0.3);
-  currentScale += (1 - currentScale) * 0.05; // yavaşça 1'e yaklaşır
-  chaser.style.setProperty('--scale', currentScale);
+      // Büyüme animasyonu (0.3 -> 1.0)
+      let currentScale = parseFloat(chaser.style.getPropertyValue('--scale') || 0.3);
+      currentScale += (1 - currentScale) * 0.05;
+      chaser.style.setProperty('--scale', currentScale);
 
-  // Hareket + büyüme
-  chaser.style.transform = `translate(${chaserX}px, ${chaserY}px) scale(${currentScale})`;
+      // Uygula
+      chaser.style.transform = `translate(${chaserX}px, ${chaserY}px) scale(${currentScale})`;
 
-  requestAnimationFrame(animate);
-}
+      requestAnimationFrame(animate);
+    }
 
     animate();
   </script>
