@@ -169,8 +169,8 @@
 
     let chaserX = window.innerWidth / 2 - 50; // Başlangıç x (merkez)
     let chaserY = window.innerHeight / 2 - 50; // Başlangıç y (merkez)
-    let mouseX = chaserX + 30; // Fare başlangıç, merkezde
-    let mouseY = chaserY + 30;
+    let mouseX = chaserX + 10; // Fare başlangıç, merkezde
+    let mouseY = chaserY + 10;
 
     chaser.style.left = chaserX + 'px';
     chaser.style.top = chaserY + 'px';
@@ -191,8 +191,8 @@
 
     function animate() {
       // Fare pozisyonunun ortasına doğru hareket için
-      const chaserCenterX = chaserX + 30;
-      const chaserCenterY = chaserY + 30;
+      const chaserCenterX = chaserX + 10;
+      const chaserCenterY = chaserY + 10;
 
       const dx = mouseX - chaserCenterX;
       const dy = mouseY - chaserCenterY;
